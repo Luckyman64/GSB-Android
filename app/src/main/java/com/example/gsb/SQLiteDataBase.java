@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 
@@ -49,6 +50,13 @@ public class SQLiteDataBase extends SQLiteOpenHelper {
         return result;
     }
 
+    public Cursor getHeure(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery("select heure from" + TABLE_NAME2, null);
+
+        return result;
+    }
+
     public Cursor getNomProSelectionne(int id){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("select nom from " + TABLE_NAME + " where id = " + id,null);
@@ -84,12 +92,12 @@ public class SQLiteDataBase extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void insertDataRdv (Cursor pro, String date, String heure){
+    public void insertDataRdv (Cursor pro, String date, View heure){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(COL_8, date);
-        contentValues.put(COL_9, heure);
+        contentValues.put(COL_9, String.valueOf(heure));
         contentValues.put(COL_10, String.valueOf(pro));
         db.insert(TABLE_NAME2, null, contentValues);
         db.close();

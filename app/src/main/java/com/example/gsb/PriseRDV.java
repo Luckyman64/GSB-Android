@@ -7,19 +7,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PriseRDV extends AppCompatActivity {
     Spinner spin;
     int idSelect;
-    ArrayList<String> pro;
+    ArrayList<String> pros;
+    Cursor listPro;
     SQLiteDataBase db;
+    View heure;
+    CalendarView calendarView;
+    String curDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +28,18 @@ public class PriseRDV extends AppCompatActivity {
         setContentView(R.layout.activity_prise_rdv);
         spin = findViewById(R.id.spinnerRDV);
         db = new SQLiteDataBase(this);
-        pro.add(db.getNomPro().toString());
-        ArrayAdapter<String> aaRDV = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, pro);
+        heure = findViewById(R.id.editTextHeure);
+        calendarView = findViewById((R.id.calendarViewRDV));
+        listPro = db.getNomPro();
+        /*int i = 0;
+        if (listPro.getCount() > 0){
+            listPro.moveToFirst();
+            do {
+                pros.set(i, listPro.getString(2));
+            } while (listPro.moveToNext());
+            listPro.close();
+        }*/
+        /*ArrayAdapter<String> aaRDV = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, pro);
         spin.setAdapter(aaRDV);
 
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -41,10 +52,19 @@ public class PriseRDV extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+        });*/
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month,
+                                            int dayOfMonth) {
+                curDate = String.valueOf(dayOfMonth);
+            }
         });
     }
-    protected void buttonRDV(Bundle savedInstanceState){
-
+    public void clicPriseRDV(View view){
+        Cursor nomPro = db.getNomProSelectionne(idSelect);
+        db.insertDataRdv(nomPro, curDate, heure);
     }
 
 
