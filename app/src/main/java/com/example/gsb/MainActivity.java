@@ -13,8 +13,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.Collections;
+
 public class MainActivity extends AppCompatActivity {
-    TextView textAfficher;
+    Spinner spinner;
     SQLiteDataBase db;
     CalendarView calendrier;
     String curDate;
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textAfficher = findViewById(R.id.editTextAfficher);
+        spinner = findViewById(R.id.spinnerMain);
         db = new SQLiteDataBase(this);
         calendrier = findViewById(R.id.calendarViewPlanning);
         calendrier.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -43,10 +45,12 @@ public class MainActivity extends AppCompatActivity {
             while(data.moveToNext()){
                 texte = String.valueOf(data.getString(3) + " " + data.getString(4));
             }
-            textAfficher.setText(texte);
+            ArrayAdapter<String> aaListPro = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Collections.singletonList(texte));
+            aaListPro.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(aaListPro);
         }
         catch(Exception e){
-            textAfficher.setText(e.getMessage());
+
         }
     }
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 
@@ -17,7 +18,8 @@ import java.util.List;
 public class PriseRDV extends AppCompatActivity {
     Spinner spin;
     int idSelect;
-    String pros[] = {"bonjour", "ta mere"};
+    /*ArrayList<String> pros;*/
+    String pros[]= {"bonjour", "maka"};
     Cursor listPro;
     SQLiteDataBase db;
     View heure;
@@ -42,13 +44,11 @@ public class PriseRDV extends AppCompatActivity {
         /*listPro = db.getNomPro();
         if (listPro.moveToFirst()) {
             while(!listPro.isAfterLast()) {
-                pros.add(listPro.getString(1));
+                pros.add(db.getNomPro().getString(1));
                 listPro.moveToNext();
             }
         }*/
-        /*for (int i = 0; i < db.getNomPro().getCount(); i++) {
-            pros.add(db.getNomPro().getString(1));
-        }*/
+
         ArrayAdapter<String> aaListPro = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, pros);
         aaListPro.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(aaListPro);
