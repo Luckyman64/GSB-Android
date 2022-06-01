@@ -30,9 +30,6 @@ public class RechercheProfessionnels extends AppCompatActivity {
 
     public void clicRecherche(View view){
         Cursor donnees = db.getRecherche(recherche.getText().toString());
-        /*ArrayAdapter<String> aaRecherche = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, (List<String>) donnees);
-        aaRecherche.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin.setAdapter(aaRecherche);*/
         if (donnees.moveToFirst()) {
             str = donnees.getString(donnees.getColumnIndex("content"));
         }

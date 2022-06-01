@@ -9,6 +9,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class SQLiteDataBase extends SQLiteOpenHelper {
     public static final String DATABASE_Name = "GSB.bd";
     public static final String TABLE_NAME = "Professionnel_table";
@@ -52,7 +54,7 @@ public class SQLiteDataBase extends SQLiteOpenHelper {
 
     public Cursor getHeure(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor result = db.rawQuery("select heure from" + TABLE_NAME2, null);
+        Cursor result = db.rawQuery("select heure from " + TABLE_NAME2, null);
 
         return result;
     }
@@ -66,7 +68,7 @@ public class SQLiteDataBase extends SQLiteOpenHelper {
 
     public Cursor getRdv(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor result = db.rawQuery("select * from " + TABLE_NAME2 + " where date = "  + date, null);
+        Cursor result = db.rawQuery("select professionnel, heure from " + TABLE_NAME2 + " where date = "  + date, null);
 
         return result;
     }

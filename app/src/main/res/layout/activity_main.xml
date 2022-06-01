@@ -37,6 +37,7 @@
                 android:onClick="clicAfficher"
                 android:layout_weight="1"
                 android:text="Afficher" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -52,12 +53,11 @@
                 android:layout_weight="1"
                 android:text="RDV du jour :" />
 
-            <TextView
-                android:id="@+id/editTextAfficher"
+            <Spinner
+                android:id="@+id/spinnerMain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 

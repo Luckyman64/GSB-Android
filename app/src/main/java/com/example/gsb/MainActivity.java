@@ -11,9 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    EditText textAfficher;
+    TextView textAfficher;
     SQLiteDataBase db;
     CalendarView calendrier;
     String curDate;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             Cursor data = db.getRdv(curDate);
             String texte = "";
             while(data.moveToNext()){
-                texte = texte + String.valueOf(data.getString(0) + " " + data.getString(1));
+                texte = String.valueOf(data.getString(3) + " " + data.getString(4));
             }
             textAfficher.setText(texte);
         }
